@@ -1,4 +1,4 @@
-use("campus");
+//use("campus");
 
 //? insertar un documento 
 //db.M3.insertOne({ name: "juan" })
@@ -78,3 +78,44 @@ use("campus");
 
 //? cuenta todos los valores traido con la consulta
 //db.M3.countDocuments({ age: { $in: [18, 20, 1] } })
+
+//? traer una referencia match solo trae las coincidencias
+// db.getCollection("M3").aggregate([
+        // {
+        //     $match: { _id: 1 }
+        // },
+//     {
+//         $lookup: {
+//           from: collection,
+//           localField: field,
+//           foreignField: field,
+//           as: result
+//         }
+//     }
+// ])
+
+
+// Auto moviles
+
+use("db_campus_alquiler");
+
+db.Contrato.aggregate([
+
+    //{ $match: { _id: 2 } },
+    {
+        $lookup: {
+          from: "Cliente",
+          localField: "ID_Cliente",
+          foreignField: "_id",
+          as: "clientes",
+        }
+    },
+    { $project: { Fecha_Inicio: 0, Fecha_Final: 0 } },
+    { 
+        $group: {
+            _id: "$Tipo",
+            clientes: { $push: "$clientes" },
+        }
+    }
+
+])
