@@ -1,0 +1,72 @@
+use("campus");
+
+//? insertar un documento 
+//db.M3.insertOne({ name: "juan" })
+
+//? insertar muchos documentos
+//db.M3.insertMany([ { name: "Luna" }, { name: "Daniela" } ])
+
+//? eliminar un documento
+//db.M3.deleteOne({ _id: ObjectId('64c96dc4f1cff184b705bcb7') })
+
+//? actualizar muchos documentos solo los campos especificados, con updateOne esta la opcion en el tercer argumento de { upsert: true } si no existe creame ese registro y si existe actualizalo
+//db.M3.updateMany({ }, { $set: { ratings: [10, 11, 13, 14] } })
+
+//? actualizar una matrix
+//db.M3.updateOne({ name: "Daniela" }, { $push: { ratings: 100 } })
+
+//? remplaza documentos, absolutamente todo el documento por la data que se le paso
+//db.M3.replaceOne({ name: "Luna" }, { name: "Diego", age: 11 })
+
+//? Modifica todo el documento y lo devuelve y segun el campo new devolvera el documento con las actualizaciones o no, tambien esta el findAndUpdate
+// db.M3.findAndModify(
+//     { 
+//         query: { name: "Emily" },
+//         update: { name: "Emily", age: 20, ratings: [99, 99] },
+//         new: true 
+//     })
+
+//? buscar todos los documentos
+//db.M3.find()
+
+//? encontrar un documento por su campo
+//db.M3.find({ name: "Daniela" })
+
+//? encontrar un campo que como valor este al menos una vez en la matriz dada
+//db.M3.find({ age: { $in: [18, 17] } })
+
+//? $gt significa que sea mayor al numero especificado
+//db.M3.find({ age: { $gt: 17 } })
+
+//? $gte significa que sea mayor o igual al numero especificado
+//db.M3.find({ age: { $gte: 18 } })
+
+//? $lt significa que sea menor al numero especificado
+//db.M3.find({ age: { $lt: 18 } })
+
+//? $lte significa que sea menor o igual al numero especificado
+//db.M3.find({ age: { $lte: 18 } })
+
+//? $elemMatch trae el valor que coincide que este dentro de una matriz y en una matriz con objetos, el $eq lo puedes cambiar por el que necesites
+//db.M3.find({ ratings: { $elemMatch: { $eq: 10 } } })
+
+//? $and es un operador logico que todas las coincidencias se debe cumplir para traer el documento
+//db.M3.find({ $and: [ { age: 18 }, { name: "Daniela" } ] })
+
+//? $or es un operador logico que al menos una coincidencia se debe cumplir para traer el documento
+//db.M3.find({ $or: [ { name: "juan" }, { name: "Daniela" } ] })
+
+//? $or y $and se debe cumplir almenos una vez cada or, se puede jugar con lo operadores
+// db.routes.find({
+//     $and: [
+//       { $or: [{ dst_airport: "SEA" }, { src_airport: "SEA" }] },
+//       { $or: [{ "airline.name": "American Airlines" }, { airplane: 320 }] },
+//     ]
+//   })
+
+//? ordena el campo especificado, el 1 lo ordena de menor a mayor y el -1 lo rodena de mayor a menor
+//db.M3.find().sort({ age: -1 })
+
+//? me trae solo la cantidad que yo le especifico
+//db.M3.find().limit(1)
+
