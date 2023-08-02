@@ -9,7 +9,10 @@ use("campus");
 //? eliminar un documento
 //db.M3.deleteOne({ _id: ObjectId('64c96dc4f1cff184b705bcb7') })
 
-//? actualizar muchos documentos solo los campos especificados, con updateOne esta la opcion en el tercer argumento de { upsert: true } si no existe creame ese registro y si existe actualizalo
+//? actualizar muchos documentos solo los campos especificados, con updateOne esta la opcion en el tercer argumento de { upsert: true } si no existe creame ese registro y si existe actualizalo, el pop elimina el ultimo elemento del array si es un y si es -1 elimina el primero, el pull elimina el valor especificado
+
+//db.updateOne({ name: "Daniela" }, { $pull: { ratings: 13 } })
+//db.updateOne({ name: "Leslie" }, { $pop: { ratings: -1 } })
 //db.M3.updateMany({ }, { $set: { ratings: [10, 11, 13, 14] } })
 
 //? actualizar una matrix
@@ -70,3 +73,8 @@ use("campus");
 //? me trae solo la cantidad que yo le especifico
 //db.M3.find().limit(1)
 
+//? para mostrar ciertos campos debes dar un segundo objeto con el nombre del campo con 1 si quieres que se muestre y 0 si no quieres que se muestre
+//db.M3.find({}, { name: 1, _id: 0 })
+
+//? cuenta todos los valores traido con la consulta
+//db.M3.countDocuments({ age: { $in: [18, 20, 1] } })
