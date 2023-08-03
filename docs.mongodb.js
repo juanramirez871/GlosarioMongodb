@@ -1,4 +1,4 @@
-//use("campus");
+use("campus");
 
 //? insertar un documento 
 //db.M3.insertOne({ name: "juan" })
@@ -97,25 +97,62 @@
 
 // Auto moviles
 
-use("db_campus_alquiler");
+// use("db_campus_alquiler");
 
-db.Contrato.aggregate([
+//? Agrupa la relacion por el campo tipo
+// db.Contrato.aggregate([
 
-    //{ $match: { _id: 2 } },
-    {
-        $lookup: {
-          from: "Cliente",
-          localField: "ID_Cliente",
-          foreignField: "_id",
-          as: "clientes",
-        }
-    },
-    { $project: { Fecha_Inicio: 0, Fecha_Final: 0 } },
-    { 
-        $group: {
-            _id: "$Tipo",
-            clientes: { $push: "$clientes" },
-        }
-    }
+//     //{ $match: { _id: 2 } },
+//     {
+//         $lookup: {
+//           from: "Cliente",
+//           localField: "ID_Cliente",
+//           foreignField: "_id",
+//           as: "clientes",
+//         }
+//     },
+//     { $project: { Fecha_Inicio: 0, Fecha_Final: 0 } },
+//     { 
+//         $group: {
+//             _id: "$Tipo",
+//             clientes: { $push: "$clientes" },
+//         }
+//     }
 
-])
+// ])
+
+//? metodos de agregacion
+
+// db.M3.aggregate([
+//     {
+//         $group: {
+//             _id: "$age",
+//             totalAge: { $sum: "$age" },
+//             names: { $push: "$name" }
+//         }
+//     },
+//     { $sort: { age: 1 } },
+//     { $limit: 4 }
+// ])
+
+//? proyecciones en una agregacion
+
+// db.M3.aggregate([
+//     {
+//         $project: { 
+//             _id: 0, 
+//             birthDay: { $subtract: [2023, "$age"] },
+//             name: 1,
+//             age: 1
+//         }
+//     }
+// ])
+
+//? crea una indexacion a los campos especificados, el 1 significa que va traer los datos ordenados ascendentemente y el -1 que los va a traer en orden descendentemente, tambien puede recibir si el valo va ser unico
+//db.M3.createIndex({ name: 1 }, { unique: true })
+
+//? le muestra los detalles de la consulta y si tiene una indexacion
+//db.M3.explain().find({ name: "juan" })
+
+//? elimina una indexacion que no se esta utilizando porque entre mas indexacion es mas el costo de la inserccion y actualizacio para ver los cambios en el rendimiento primero debes ejecutar el hiddenIndex para ocultarlo primero
+//db.M3.dropIndex("nombre de la indexacion")
