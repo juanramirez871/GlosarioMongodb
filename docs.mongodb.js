@@ -156,3 +156,27 @@ use("campus");
 
 //? elimina una indexacion que no se esta utilizando porque entre mas indexacion es mas el costo de la inserccion y actualizacio para ver los cambios en el rendimiento primero debes ejecutar el hiddenIndex para ocultarlo primero
 //db.M3.dropIndex("nombre de la indexacion")
+
+
+//? Esquemas con mongodb purito
+
+// db.createCollection("week", {
+
+//         capped: true,
+//         size: 690,
+//         max: 5,
+//         validator: {
+
+//                 $jsonSchema: {
+
+//                         bsonType: "object",
+//                         additionalProperties: false,
+//                         required: [ "name", "numberDay" ],
+//                         properties: {
+//                                 _id: { bsonType: "objectId" },
+//                                 name: { bsonType: "string", description: "name is required of type string" },
+//                                 numberDay: { bsonType: "int", description: "numberDay is required of type integer" },
+//                         }
+//                 }
+//         }
+// })
